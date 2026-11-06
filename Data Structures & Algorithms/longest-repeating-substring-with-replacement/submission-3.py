@@ -1,0 +1,23 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        # res = 0
+        # for i in range(len(s)):
+        #     freq = {}
+        #     maxf = 0
+        #     for j in range(i, len(s)):
+        #         freq[s[j]] = 1 + freq.get(s[j], 0)
+        #         maxf = max(maxf, freq[s[j]])
+        #         if (j - i + 1) - maxf <= k:
+        #             res = max(res, j - i + 1)
+        # return res
+
+        res = 0
+        l = 0
+        count = {}
+        for r in range(len(s)):
+            count[s[r]] = 1 + count.get(s[r], 0)
+            while (r - l + 1) - max(count.values()) > k:
+                count[s[l]] -= 1
+                l += 1
+            res = max(res, r - l + 1)
+        return res
